@@ -68,21 +68,21 @@ const Link = React.forwardRef(function Link(props, ref) {
   const isExternal =
     typeof href === 'string' && (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
 
-  if (isExternal) {
-    if (noLinkStyle) {
-      return <Anchor className={className} href={href} ref={ref} {...other} />;
+    if (isExternal) {
+      if (noLinkStyle) {
+        return <Anchor className={className} href={href} ref={ref} {...other} />;
+      }
+      
+      return <MuiLink className={className} href={href} ref={ref} {...other} />;
     }
-
-    return <MuiLink className={className} href={href} ref={ref} {...other} />;
-  }
-
-  const linkAs = linkAsProp || as;
-  const nextjsProps = { to: href, linkAs, replace, scroll, shallow, prefetch, locale };
-
-  if (noLinkStyle) {
-    return <NextLinkComposed className={className} ref={ref} {...nextjsProps} {...other} />;
-  }
-
+    
+    const linkAs = linkAsProp || as;
+    const nextjsProps = { to: href, linkAs, replace, scroll, shallow, prefetch, locale };
+    
+    if (noLinkStyle) {
+      return <NextLinkComposed className={className} ref={ref} {...nextjsProps} {...other} />;
+    }
+    
   return (
     <MuiLink
       component={NextLinkComposed}
