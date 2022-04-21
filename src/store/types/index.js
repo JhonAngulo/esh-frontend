@@ -1,0 +1,19 @@
+
+// Login
+
+export const LOGIN = {
+    'AUTH_GET': 'AUTH_GET',
+    'USER_INFO_GET': 'USER_INFO_GET',
+    'USER_SET': 'USER_SET',
+    'USER_ERROR': 'USER_ERROR',
+    'USER_CLEAR': 'USER_CLEAR',
+}
+
+// Gateway
+
+export const GATEWAY = {
+    'GATEWAY_DATA_GET': 'GATEWAY_DATA_GET',
+    'GATEWAY_DATA_SET': 'GATEWAY_DATA_SET',
+    'GATEWAY_DATA_ERROR': 'GATEWAY_DATA_ERROR',
+    'GATEWAY_DATA_CLEAR': 'GATEWAY_DATA_CLEAR',
+}

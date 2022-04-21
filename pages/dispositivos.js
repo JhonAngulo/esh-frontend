@@ -4,6 +4,7 @@ import * as mqtt from "mqtt"  // import everything inside the mqtt module and gi
 import Typography from '@mui/material/Typography';
 
 
+
 // var client  = mqtt.connect('mqtt://54.196.130.6:8888', {
 //   protocol: 'ws',
 //   port: 8888
@@ -12,7 +13,7 @@ import Typography from '@mui/material/Typography';
 // client.subscribe('cloud/event/90002552');
 
 
-export default function About() {
+export default function Devices() {
 
   const [msg, setMsg] = useState('{"none": "null"}');
 

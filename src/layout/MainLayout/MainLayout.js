@@ -12,7 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Link from '../../Link';
+import Link from '../../components/Link';
 import optionsList from './menuOptionsList';
 import logo from '../../assets/logo.png'
 import Image from 'next/image'
