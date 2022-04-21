@@ -10,8 +10,6 @@ const UserInfo = () => {
   
   const open = Boolean(anchorEl);
 
-  console.log('user info com', user.authUser)
-
   const usernameDisplay = `${user.authUser.name.split(' ')[0]} ${user.authUser.lastName.split(' ')[1]}`
 
   const handleClick = (event) => {

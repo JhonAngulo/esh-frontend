@@ -1,13 +1,12 @@
 import { Grid } from '@mui/material'
+import { Box } from '@mui/system'
 import React from 'react'
 import SwitchDevice from '../../components/Devices/Switch/SwitchDevice'
 
 const Devices = ({ devices, items }) => {
-    console.log(devices)
-    console.log('items', items)
 
     const handleRenderDevice = (device) => {
-        console.log('intro')
+ 
         const variables = items.filter((item) => item.device_id === device.id)
         
         switch (device.category) {
@@ -15,14 +14,18 @@ const Devices = ({ devices, items }) => {
                 return <SwitchDevice key={device.id} device={device} variables={variables} />
         
             default:
-                return <p key={device.id}>No render device {device.category}</p>
+                return (
+                    <Box key={device.id} sx={{ pr:2, pl: 2, pb: 2, pt: 2 }}>
+                        <p>No render device {device.category}</p>
+                    </Box>
+                )
         }
     }
 
   return (
     <>
         <div>Devices</div>
-        <Grid container spacing={2}>
+        <Grid container spacing={4} >
             {
                 devices.map((device) => {
                     return handleRenderDevice(device)

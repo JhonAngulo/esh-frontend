@@ -9,3 +9,8 @@ export const setGateway = (payload) => ({
   payload
 })
 
+export const updateItemStatus = (payload) => ({
+  type: GATEWAY.GATEWAY_DATA_UPDATE_ITEM,
+  payload
+})
+

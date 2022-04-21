@@ -6,7 +6,6 @@ import Api from '../api'
 function * getGatewayData () {
   try {
     const gateway = yield call(Api.getGateway)
-    console.log('gateway', gateway)
     if (gateway.data) {
       yield put(setGateway(gateway.data))
     }

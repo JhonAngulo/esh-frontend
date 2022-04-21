@@ -6,6 +6,24 @@ const initialState = {
   error: null
 }
 
+const handleItemUpdate = ({ data, event }) => {
+  const idUpdate = event.idDispositivo.toString().split('-')[1]
+  const statusUpdate = event.estado
+  const typeUpdate = event.tipoEstado
+
+  const newItems =  data[0].items.map((item) => {
+    let newItem = item
+    if (newItem.id === idUpdate) {
+      newItem.value = typeUpdate === 'bool' ? Boolean(statusUpdate) : statusUpdate
+    }
+    return newItem
+  })
+  return [{
+    ...data[0],
+    items: newItems
+  }]
+} 
+
 const gatewayReducer = (state = initialState, action) => {
   switch (action.type) {
     case GATEWAY.GATEWAY_DATA_GET:
@@ -20,6 +38,13 @@ const gatewayReducer = (state = initialState, action) => {
         status: 'succeeded',
         error: null
       }
+    case GATEWAY.GATEWAY_DATA_UPDATE_ITEM:
+        return {
+          ...state,
+          data: handleItemUpdate({ data: state.data, event: action.payload }),
+          status: 'succeeded',
+          error: null
+        }
     case GATEWAY.GATEWAY_DATA_ERROR:
       return {
         ...state,

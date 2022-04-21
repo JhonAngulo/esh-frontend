@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux'
-import { getGateway } from '../src/store/actions/gateway'
+import { getGateway, updateItemStatus } from '../src/store/actions/gateway'
 import DevicesContainer from '../src/containers/devices'
 import * as mqtt from "mqtt"  // import everything inside the mqtt module and give it the namespace "mqtt"ate a client
 
@@ -37,8 +37,8 @@ export default function dispositivos() {
 
     client.on('message', (topic, message) => { 
       const newMsg = message.toString()
-      console.log(topic, newMsg)
       setMsg(newMsg);
+      dispatch(updateItemStatus(JSON.parse(newMsg)))
     });
   
     return () => {
@@ -53,7 +53,6 @@ export default function dispositivos() {
     return <p>loading...</p>
   }
 
-  console.log(gateway.data[0].serial)
   return (
     <>
       <Typography variant="h4" component="h1" color='primary'>
