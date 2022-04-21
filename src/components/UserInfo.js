@@ -1,12 +1,18 @@
 import { AccountBox, Logout } from '@mui/icons-material';
 import { Avatar, Box, ListItemIcon, Menu, MenuItem, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const UserInfo = () => {
 
+  const user = useSelector(state => state.user)
   const [anchorEl, setAnchorEl] = useState(null);
   
   const open = Boolean(anchorEl);
+
+  console.log('user info com', user.authUser)
+
+  const usernameDisplay = `${user.authUser.name.split(' ')[0]} ${user.authUser.lastName.split(' ')[1]}`
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,10 +25,10 @@ const UserInfo = () => {
     <>
     <Box component='div' sx={{ display: 'flex', gap: '10px', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={handleClick} >
         <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" >
-            J
+            {usernameDisplay.charAt(0)}
         </Avatar>
         <Typography variant="body1" component="p" color='textSecondary' fontWeight={500}>
-            Jhon Manuel
+          {usernameDisplay}
         </Typography>
     </Box>
     <Menu

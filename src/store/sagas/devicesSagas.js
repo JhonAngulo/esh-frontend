@@ -1,16 +1,14 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import axios from 'axios'
-import { LOGIN } from '../types'
+import { setGateway } from '../actions/gateway'
+import { GATEWAY } from '../types'
 import Api from '../api'
 
-function * getSingIn ({ payload }) {
+function * getGatewayData () {
   try {
-    const auth = yield call(Api.userSingIn, { ...payload })
-    console.log('userSaga', auth.token)
-    if (auth.token) {
-      localStorage.setItem('token', auth.token)
-      localStorage.setItem('refreshToken', auth.refreshToken)
-      yield put({ type: LOGIN.USER_SET, payload: auth })
+    const gateway = yield call(Api.getGateway)
+    console.log('gateway', gateway)
+    if (gateway.data) {
+      yield put(setGateway(gateway.data))
     }
   } catch (e) {
     console.log(e)
@@ -18,8 +16,8 @@ function * getSingIn ({ payload }) {
   }
 }
 
-function * authSaga () {
-  yield takeLatest(LOGIN.USER_GET, getSingIn)
+function * gatewaySaga () {
+  yield takeLatest(GATEWAY.GATEWAY_DATA_GET, getGatewayData)
 }
 
-export default authSaga
+export default gatewaySaga

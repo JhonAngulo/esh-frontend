@@ -19,7 +19,13 @@ async function userInfo () {
   return response.data
 }
 
+async function getGateway () {
+  const response = await axios.get('gateways')
+  return response.data
+}
+
 export default {
   userSingIn,
-  userInfo
+  userInfo,
+  getGateway
 }

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 
 const authManager = (props) => {
     const user = useSelector(state => state.user)
-    console.log('user', user)
 
     const router = useRouter()
 

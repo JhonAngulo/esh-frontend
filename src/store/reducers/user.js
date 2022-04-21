@@ -1,7 +1,7 @@
 import {LOGIN} from '../types'
 
 const initialState = {
-  user: {},
+  authUser: {},
   isAuth: false,
   status: 'idle',
   error: null
@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN.USER_SET:
       return {
         ...state,
-        user: action.payload,
+        authUser: action.payload,
         isAuth: true,
         status: 'succeeded',
         error: null
@@ -30,7 +30,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN.USER_ERROR:
       return {
         ...state,
-        user: {},
+        authUser: {},
         isAuth: false,
         status: 'failed',
         error: action.payload

@@ -26,7 +26,6 @@ function * getUserInfoByToken () {
     const userInfo = yield call(Api.userInfo)
     
     if (userInfo) {
-      console.log('userInfo', userInfo)
       yield put(setAuthUser(userInfo.data))
 
     }
