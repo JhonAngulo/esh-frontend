@@ -8,8 +8,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { Grid, IconButton, Paper } from '@mui/material';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
 
-const SwitchDevice = ({ device, variables}) => {
+const SwitchDevice = ({ device, variables, sendEvent}) => {
 
   const [state, setState] = useState(variables.filter((item) => item.name === 'switch')[0].value)
  
@@ -18,31 +19,36 @@ const SwitchDevice = ({ device, variables}) => {
   }, [variables])
 
   const handleChangeState = () => {
-    setState((prevState) => !prevState)
+    // setState((prevState) => !prevState)
+    sendEvent({
+      id: variables.filter((item) => item.name === 'switch')[0].id, 
+      eventType: 'item_updated', 
+      value: !state
+    })
   }
 
   return (
     <Grid item >
       <Paper elevation={8} sx={{ borderRadius: 8 }}  >
-      <Card sx={{ display: 'flex', minWidth: 330 }} >
+      <Card sx={{ display: 'flex', width: 300, height: 114 }} >
 
-        <Box sx={{ height: 'auto', width: 100, backgroundColor: '#87a8ed', textAlign: 'center', display: 'grid', alignContent: 'center', justifyContent: 'center' }}>
-          <IconButton aria-label="play/pause">
+        <Box sx={{ height: 'auto', width: 100, backgroundColor: '#5b7ff74d', textAlign: 'center', display: 'grid', alignContent: 'center', justifyContent: 'center' }}>
+          <IconButton aria-label="icon_device">
             <LightbulbIcon sx={{ height: 38, width: 38 }} htmlColor={'#3a3a39'} color={`${state && 'primary'}`}/>
           </IconButton>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flex: '1 0 auto' }}>
+        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ flex: '1 0 auto', padding: '10px', pb: 0 }}>
             <Typography component="div" variant="h5">
               {device.name}
             </Typography>
             <Typography variant="subtitle2" color="text.secondary" component="div">
-              {device.id}
+              <ElectricalServicesIcon sx={{ height: 24, width: 24 }} color='inherit' />
             </Typography>
           </CardContent>
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', pl: '130px', pb: 1 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center', pr: '10px', pb: '4px' }}>
               <FormGroup>
-                  <FormControlLabel control={<Switch checked={state} onChange={handleChangeState} inputProps={{ 'aria-label': 'controlled' }}/>} label={state ? 'On': 'Off'} />
+                  <FormControlLabel control={<Switch checked={state} onChange={handleChangeState} inputProps={{ 'aria-label': 'controlled' }}/>} label={state ? 'Encendido': 'Apagado'} />
               </FormGroup>
           </Box>
         </Box>

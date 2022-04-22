@@ -11,6 +11,7 @@ const handleItemUpdate = ({ data, event }) => {
   const statusUpdate = event.estado
   const typeUpdate = event.tipoEstado
 
+  console.log('statusUpdate', statusUpdate)
   const newItems =  data[0].items.map((item) => {
     let newItem = item
     if (newItem.id === idUpdate) {

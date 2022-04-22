@@ -1,9 +1,12 @@
 import { Grid } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import SwitchDevice from '../../components/Devices/Switch/SwitchDevice'
+import SwitchDevice from '../../components/Devices/SwitchDevice'
+import Door_SensorDevice from '../../components/Devices/Door_SensorDevice'
+import Motion_SensorDevice from '../../components/Devices/Motion_SensorDevice'
+import Temperature_SensorDevice from '../../components/Devices/Temperature_SensorDevice'
 
-const Devices = ({ devices, items }) => {
+const Devices = ({ devices, items, sendEvent }) => {
 
     const handleRenderDevice = (device) => {
  
@@ -11,7 +14,18 @@ const Devices = ({ devices, items }) => {
         
         switch (device.category) {
             case 'switch':
-                return <SwitchDevice key={device.id} device={device} variables={variables} />
+                return <SwitchDevice key={device.id} device={device} variables={variables} sendEvent={sendEvent} />
+
+            case 'security_sensor':
+                if (device.subcategory === 'motion') {
+                    return <Motion_SensorDevice key={device.id} device={device} variables={variables} sendEvent={sendEvent} />
+                }
+                if (device.subcategory === 'door') {
+                    return <Door_SensorDevice key={device.id} device={device} variables={variables} sendEvent={sendEvent} />
+                }
+
+            case 'temperature':
+                return <Temperature_SensorDevice key={device.id} device={device} variables={variables} sendEvent={sendEvent} />
         
             default:
                 return (
@@ -23,16 +37,13 @@ const Devices = ({ devices, items }) => {
     }
 
   return (
-    <>
-        <div>Devices</div>
-        <Grid container spacing={4} >
-            {
-                devices.map((device) => {
-                    return handleRenderDevice(device)
-                })
-            }
-        </Grid>
-    </>
+    <Grid container spacing={4} >
+        {
+            devices.map((device) => {
+                return handleRenderDevice(device)
+            })
+        }
+    </Grid>
   )
 }
 
