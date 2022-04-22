@@ -1,13 +1,14 @@
 import { AccountBox, Logout } from '@mui/icons-material';
 import { Avatar, Box, ListItemIcon, Menu, MenuItem, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { userLogout } from '../store/actions/auth'
 
 const UserInfo = () => {
 
   const user = useSelector(state => state.user)
   const [anchorEl, setAnchorEl] = useState(null);
-  
+  const dispatch = useDispatch()
   const open = Boolean(anchorEl);
 
   const usernameDisplay = `${user.authUser.name.split(' ')[0]} ${user.authUser.lastName.split(' ')[1]}`
@@ -18,6 +19,10 @@ const UserInfo = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    dispatch(userLogout())
+  }
 
   return (
     <>
@@ -70,7 +75,7 @@ const UserInfo = () => {
           </ListItemIcon>
           Cuenta
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="medium" color='primary' />
           </ListItemIcon>

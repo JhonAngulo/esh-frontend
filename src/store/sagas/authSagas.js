@@ -1,4 +1,4 @@
-import { getUserInfo, setAuthUser } from '../actions/auth'
+import { getUserInfo, setAuthUser, clearAuthUser } from '../actions/auth'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import axios from 'axios'
 import { LOGIN } from '../types'
@@ -21,6 +21,15 @@ function * getTokensSingIn ({ payload }) {
   }
 }
 
+function *  userLogoutClearTokens() {
+
+  localStorage.removeItem('token')
+  localStorage.removeItem('refreshToken')
+  axios.defaults.headers.common['Authorization'] = ''
+  yield put(clearAuthUser())
+
+}
+
 function * getUserInfoByToken () {
   try {
     const userInfo = yield call(Api.userInfo)
@@ -38,6 +47,7 @@ function * getUserInfoByToken () {
 function * authSaga () {
   yield takeLatest(LOGIN.AUTH_GET, getTokensSingIn)
   yield takeLatest(LOGIN.USER_INFO_GET, getUserInfoByToken)
+  yield takeLatest(LOGIN.AUTH_LOGOUT, userLogoutClearTokens)
 }
 
 export default authSaga

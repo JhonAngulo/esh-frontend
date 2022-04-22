@@ -13,7 +13,11 @@ const authManager = (props) => {
       if (!user.isAuth && router.pathname !== '/login' && router.pathname !== '/_error') {
         router.push('/login')
       }
-    }, [])
+
+      if (user.isAuth && router.pathname === '/login') {
+        router.push('/')
+      }
+    }, [user.isAuth])
 
     return (
     <>

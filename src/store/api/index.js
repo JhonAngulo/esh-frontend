@@ -1,8 +1,9 @@
 
 import axios from "axios"
 
-axios.defaults.baseURL = 'http://3.88.111.71:5000/api/v1/'
-axios.defaults.headers.common['x-api-key'] = 'CC137A193287D757BB3CA33TT5B18'
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_URL_BASE
+axios.defaults.headers.common['x-api-key'] = process.env.NEXT_PUBLIC_X_API_KEY
+
 
 async function userSingIn ({ username, password }) {
   const params = {

@@ -5,6 +5,10 @@ export const userSingin = ({ username, password }) => ({
   payload: { username, password }
 })
 
+export const userLogout = () => ({
+  type: LOGIN.AUTH_LOGOUT
+})
+
 export const getUserInfo = () => ({
   type: LOGIN.USER_INFO_GET
 })
@@ -12,5 +16,9 @@ export const getUserInfo = () => ({
 export const setAuthUser = (payload) => ({
   type: LOGIN.USER_SET,
   payload
+})
+
+export const clearAuthUser = () => ({
+  type: LOGIN.USER_CLEAR
 })
 
