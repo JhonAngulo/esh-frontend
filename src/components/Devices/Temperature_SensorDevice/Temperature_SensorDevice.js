@@ -29,10 +29,9 @@ const Temperature_SensorDevice = ({ device, variables, sendEvent}) => {
   }
 
   const handleTempIcon = () => {
-console.log('temp', temp)
-    if (temp.value >= 50) {
+    if (temp.value >= 28) {
       return <WbSunnyIcon sx={{ height: 38, width: 38 }} color='warning' />
-    } else if (temp.value  >= 20) {
+    } else if (temp.value  >= 25) {
       return <AirIcon sx={{ height: 38, width: 38 }} htmlColor='#1a740a' />
     } else {
       return <AcUnitIcon sx={{ height: 38, width: 38 }} color='primary' />
