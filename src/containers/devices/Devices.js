@@ -1,12 +1,13 @@
 import { Grid } from '@mui/material'
-import { Box } from '@mui/system'
-import React from 'react'
 import SwitchDevice from '../../components/Devices/SwitchDevice'
 import Door_SensorDevice from '../../components/Devices/Door_SensorDevice'
 import Motion_SensorDevice from '../../components/Devices/Motion_SensorDevice'
 import Temperature_SensorDevice from '../../components/Devices/Temperature_SensorDevice'
+import GenericDevice from '../../components/Devices/GenericDevice'
 
 const Devices = ({ devices, items, sendEvent }) => {
+
+    const validCategories = ['switch', 'security_sensor', 'temperature']
 
     const handleRenderDevice = (device) => {
  
@@ -28,11 +29,7 @@ const Devices = ({ devices, items, sendEvent }) => {
                 return <Temperature_SensorDevice key={device.id} device={device} variables={variables} sendEvent={sendEvent} />
         
             default:
-                return (
-                    <Box key={device.id} sx={{ pr:2, pl: 2, pb: 2, pt: 2 }}>
-                        <p>No render device {device.category}</p>
-                    </Box>
-                )
+                return
         }
     }
 
@@ -40,7 +37,16 @@ const Devices = ({ devices, items, sendEvent }) => {
     <Grid container spacing={4} >
         {
             devices.map((device) => {
-                return handleRenderDevice(device)
+                if (validCategories.includes(device.category)) {
+                    return handleRenderDevice(device)
+                }
+            })
+        }
+        {
+            devices.map((device) => {
+                if (!validCategories.includes(device.category)) {
+                    return <GenericDevice key={device.id} device={device} />
+                }
             })
         }
     </Grid>

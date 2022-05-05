@@ -30,16 +30,16 @@ const SwitchDevice = ({ device, variables, sendEvent}) => {
   return (
     <Grid item >
       <Paper elevation={8} sx={{ borderRadius: 8 }}  >
-      <Card sx={{ display: 'flex', width: 300, height: 114 }} >
+      <Card sx={{ display: 'flex', width: 320, height: 114 }} >
 
         <Box sx={{ height: 'auto', width: 100, backgroundColor: '#5b7ff74d', textAlign: 'center', display: 'grid', alignContent: 'center', justifyContent: 'center' }}>
           <IconButton aria-label="icon_device">
             <LightbulbIcon sx={{ height: 38, width: 38 }} htmlColor={'#3a3a39'} color={`${state && 'primary'}`}/>
           </IconButton>
         </Box>
-        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ width: 220, display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto', padding: '10px', pb: 0 }}>
-            <Typography component="div" variant="h5">
+            <Typography component="div" variant="h5" noWrap>
               {device.name}
             </Typography>
             <Typography variant="subtitle2" color="text.secondary" component="div">

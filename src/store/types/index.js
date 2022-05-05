@@ -3,6 +3,7 @@
 
 export const LOGIN = {
     'AUTH_GET': 'AUTH_GET',
+    'AUTH_REFRESH_TOKEN': 'AUTH_REFRESH_TOKEN',
     'AUTH_LOGOUT': 'AUTH_LOGOUT',
     'USER_INFO_GET': 'USER_INFO_GET',
     'USER_SET': 'USER_SET',

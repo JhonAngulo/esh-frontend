@@ -15,6 +15,15 @@ async function userSingIn ({ username, password }) {
   return response.data
 }
 
+async function refreshTokens ({ refreshToken }) {
+  const params = {
+    refreshToken
+  }
+  
+  const response = await axios.post('auth/refreshtoken', params)
+  return response.data
+}
+
 async function userInfo () {
   const response = await axios.get('users/info')
   return response.data
@@ -27,6 +36,7 @@ async function getGateway () {
 
 export default {
   userSingIn,
+  refreshTokens,
   userInfo,
   getGateway
 }

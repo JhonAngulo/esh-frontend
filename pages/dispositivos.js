@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux'
-import { getGateway, updateItemStatus } from '../src/store/actions/gateway'
+import { getGateway, updateItemStatus, clearGateway } from '../src/store/actions/gateway'
 import DevicesContainer from '../src/containers/devices'
 import * as mqtt from "mqtt"  // import everything inside the mqtt module and give it the namespace "mqtt"ate a client
 import { Box } from '@mui/material';
@@ -14,13 +14,26 @@ import { Box } from '@mui/material';
 // client.subscribe('cloud/event/90002552');
 
 
-export default function dispositivos() {
+const dispositivos = () => {
 
   const gateway = useSelector(state => state.gateway)
   const dispatch = useDispatch()
   const [msg, setMsg] = useState('{"none": "null"}');
+  const mount = useRef(false)
   
   const client = useRef(null)
+
+  useEffect(() => {
+    return () => {
+      if (mount.current && gateway.status === 'loading') {
+        if (!gateway.data[0]) { 
+          console.log('clean gateway')
+          dispatch(clearGateway())
+        }
+      }
+      mount.current = true
+    }
+  }, [])
   
   useEffect(() => {
     if(gateway.status === 'idle') {
@@ -74,3 +87,5 @@ export default function dispositivos() {
     </>
   );
 }
+
+export default dispositivos

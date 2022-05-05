@@ -14,3 +14,6 @@ export const updateItemStatus = (payload) => ({
   payload
 })
 
+export const clearGateway = () => ({
+  type: GATEWAY.GATEWAY_DATA_CLEAR
+})

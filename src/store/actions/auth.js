@@ -5,6 +5,10 @@ export const userSingin = ({ username, password }) => ({
   payload: { username, password }
 })
 
+export const updateTokens = () => ({
+  type: LOGIN.AUTH_REFRESH_TOKEN,
+})
+
 export const userLogout = () => ({
   type: LOGIN.AUTH_LOGOUT
 })

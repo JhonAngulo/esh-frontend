@@ -21,6 +21,27 @@ function * getTokensSingIn ({ payload }) {
   }
 }
 
+function * getRefreshTokens () {
+  try {
+    const token = localStorage.getItem('token')
+    const refreshToken = localStorage.getItem('refreshToken')
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    const auth = yield call(Api.refreshTokens, { token, refreshToken })
+    
+    if (auth.token) {
+      localStorage.setItem('token', auth.token)
+      localStorage.setItem('refreshToken', auth.refreshToken)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${auth.token}`
+      yield put(getUserInfo())
+
+    }
+  } catch (e) {
+    console.log(e)
+    // yield put({ type: 'ERROR', message: e.message })
+  }
+}
+
+
 function *  userLogoutClearTokens() {
 
   localStorage.removeItem('token')
@@ -46,8 +67,9 @@ function * getUserInfoByToken () {
 
 function * authSaga () {
   yield takeLatest(LOGIN.AUTH_GET, getTokensSingIn)
-  yield takeLatest(LOGIN.USER_INFO_GET, getUserInfoByToken)
+  yield takeLatest(LOGIN.AUTH_REFRESH_TOKEN, getRefreshTokens)
   yield takeLatest(LOGIN.AUTH_LOGOUT, userLogoutClearTokens)
+  yield takeLatest(LOGIN.USER_INFO_GET, getUserInfoByToken)
 }
 
 export default authSaga
