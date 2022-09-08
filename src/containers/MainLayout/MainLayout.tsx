@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link as RouterLink } from 'react-router-dom'
 import { MouseEventHandler, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -16,6 +16,7 @@ import optionsList from './menuOptionsList'
 import logo from '@assets/logo.webp'
 import UserInfo from '@components/UserInfo'
 import { useSelector } from 'react-redux'
+import { Link } from '@mui/material'
 
 const drawerWidth = 240
 
@@ -41,7 +42,14 @@ const MainLayout = ({ window }: any): JSX.Element => {
       <Toolbar />
       <List>
         {optionsList.map(({ id, displayName, urlLink, icon }: any) => (
-          <Link to={urlLink} color="primary" key={id} className="menu">
+          <Link
+            to={urlLink}
+            color="primary"
+            key={id}
+            className="menu"
+            underline="none"
+            component={RouterLink}
+          >
             <ListItem button>
               <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={displayName} />
