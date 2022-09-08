@@ -7,6 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "types": ["vite/client"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
@@ -18,15 +19,13 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@apis/*": ["./src/apis/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@containers/*": ["./src/containers/*"],
-      "@constants/*": ["./src/constants/*"],
       "@pages/*": ["./src/pages/*"],
-
+      "@store/*": ["./src/store/*"],
     }
   },
-  "include": ["src", ".eslintrc.cjs"],
+  "include": ["src", ".eslintrc.cjs", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

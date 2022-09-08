@@ -1,12 +1,17 @@
 import { CssBaseline } from '@mui/material'
-import Home from '@pages/Home'
+import { Provider } from 'react-redux'
+import store from '@store/store'
+import AppRouter from './AppRouter'
+import { BrowserRouter } from 'react-router-dom'
 
 const App = (): JSX.Element => {
   return (
-    <>
-      <CssBaseline />
-      <Home />
-    </>
+    <BrowserRouter>
+      <Provider store={store}>
+        <CssBaseline />
+        <AppRouter />
+      </Provider>
+    </BrowserRouter>
   )
 }
 
