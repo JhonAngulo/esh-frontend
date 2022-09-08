@@ -29,11 +29,11 @@ const AppRouter = (): JSX.Element => {
     }
 
     if (user.status === 'succeeded' && (user.isAuth as boolean)) {
-      navigate('/inicio')
+      navigate('/')
     }
   }, [user])
 
-  if (!['idle', 'succeeded'].includes(user.status)) {
+  if (user.status === 'loading') {
     return <>loading...</>
   }
 
@@ -42,8 +42,10 @@ const AppRouter = (): JSX.Element => {
       <Routes>
         <Route path="/login" element={<LoginLayout />} />
         <Route path="/" element={<MainLayout />}>
-          <Route path="/inicio" element={<>Manuel</>} />
-          <Route path="/dispositivos" element={<>Manuel</>} />
+          <Route index element={<>Home</>} />
+          <Route path="/acerca" element={<>acerca</>} />
+          <Route path="/configuraciones" element={<>configuraciones</>} />
+          <Route path="/dispositivos" element={<>dispositivos</>} />
         </Route>
       </Routes>
     </>
