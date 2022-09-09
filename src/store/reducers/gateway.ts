@@ -18,8 +18,7 @@ const handleItemUpdate: any = ({ data, event }: any) => {
   const statusUpdate = event.estado
   const typeUpdate = event.tipoEstado
 
-  console.log('statusUpdate', statusUpdate)
-  const newItems = data[0].items.map((item: any) => {
+  const newItems = data[1].items.map((item: any) => {
     const newItem = item
     if (newItem.id === idUpdate) {
       newItem.value =
@@ -27,9 +26,11 @@ const handleItemUpdate: any = ({ data, event }: any) => {
     }
     return newItem
   })
+
   return [
+    ...data,
     {
-      ...data[0],
+      ...data[1],
       items: newItems
     }
   ]

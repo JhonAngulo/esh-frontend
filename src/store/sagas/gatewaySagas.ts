@@ -26,11 +26,7 @@ function* getGatewayData(): Generator<
   }
 }
 
-async function* gatewaySaga(): AsyncGenerator<
-  ForkEffect<never>,
-  void,
-  unknown
-> {
+function* gatewaySaga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeLatest(GATEWAY.GATEWAY_DATA_GET, getGatewayData)
 }
 

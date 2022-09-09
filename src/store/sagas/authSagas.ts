@@ -68,7 +68,6 @@ function* getRefreshTokens(): Generator<
     if (token !== null && refreshToken !== null) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`
       const auth = yield call(Api.refreshTokens, { refreshToken })
-      console.log('ando por aqui refesh', auth)
 
       if (auth.results.token as boolean) {
         localStorage.setItem('token', auth.results.token)

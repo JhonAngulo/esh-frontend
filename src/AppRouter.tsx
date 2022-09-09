@@ -1,5 +1,6 @@
 import LoginLayout from '@containers/LoginLayout'
 import MainLayout from '@containers/MainLayout/MainLayout'
+import Devices from '@pages/Devices'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef } from 'react'
@@ -45,7 +46,7 @@ const AppRouter = (): JSX.Element => {
           <Route index element={<>Home</>} />
           <Route path="/acerca" element={<>acerca</>} />
           <Route path="/configuraciones" element={<>configuraciones</>} />
-          <Route path="/dispositivos" element={<>dispositivos</>} />
+          <Route path="/dispositivos" element={<Devices />} />
         </Route>
       </Routes>
     </>
