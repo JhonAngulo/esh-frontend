@@ -1,7 +1,7 @@
 import LoginLayout from '@containers/LoginLayout'
 import MainLayout from '@containers/MainLayout/MainLayout'
 import Devices from '@pages/Devices'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { tokenLogin } from '@store/actions/auth'
@@ -14,6 +14,7 @@ const AppRouter = (): JSX.Element => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     if (token !== null && refreshToken !== null && !checkTokens.current) {
@@ -30,7 +31,12 @@ const AppRouter = (): JSX.Element => {
     }
 
     if (user.status === 'succeeded' && (user.isAuth as boolean)) {
-      navigate('/')
+      const validPathnames = ['/acerca', '/configuraciones', '/dispositivos']
+      if (validPathnames.includes(location.pathname)) {
+        navigate(location.pathname)
+      } else {
+        navigate('/')
+      }
     }
   }, [user])
 

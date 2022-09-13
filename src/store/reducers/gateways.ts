@@ -14,11 +14,21 @@ const initialState: InitialStateProps = {
 }
 
 const handleItemUpdate: any = ({ data, event }: any) => {
-  const idUpdate = event.idDispositivo.toString().split('-')[1]
-  const statusUpdate = event.estado
-  const typeUpdate = event.tipoEstado
+  const idUpdate = event.deviceId.toString().split('-')[1]
+  const statusUpdate = event.value
+  const typeUpdate = event.event
 
-  const newItems = data[1].items.map((item: any) => {
+  const gatewaySelected = localStorage.getItem('gatewaySelected')
+
+  if (gatewaySelected === null) {
+    return data
+  }
+
+  const gatewayUpdate = data.filter(
+    (gateway: any) => gateway.serial === gatewaySelected
+  )[0]
+
+  const updateItems = gatewayUpdate.items.map((item: any) => {
     const newItem = item
     if (newItem.id === idUpdate) {
       newItem.value =
@@ -27,16 +37,15 @@ const handleItemUpdate: any = ({ data, event }: any) => {
     return newItem
   })
 
-  return [
-    ...data,
-    {
-      ...data[1],
-      items: newItems
+  return data.map((gateway: any) => {
+    if (gateway.serial === gatewaySelected) {
+      gateway.items = updateItems
     }
-  ]
+    return gateway
+  })
 }
 
-const gatewayReducer: Reducer<InitialStateProps, AnyAction> = (
+const gatewaysReducer: Reducer<InitialStateProps, AnyAction> = (
   state = initialState,
   action: AnyAction
 ) => {
@@ -76,4 +85,4 @@ const gatewayReducer: Reducer<InitialStateProps, AnyAction> = (
   }
 }
 
-export default gatewayReducer
+export default gatewaysReducer

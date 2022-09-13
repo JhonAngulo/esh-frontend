@@ -6,7 +6,7 @@ import {
   PutEffect,
   takeLatest
 } from 'redux-saga/effects'
-import { setGateway } from '../actions/gateway'
+import { setGateways } from '../actions/gateway'
 import { GATEWAY } from '../types'
 import Api from '../api'
 
@@ -18,7 +18,7 @@ function* getGatewayData(): Generator<
   try {
     const gateway = yield call(Api.getGateway)
     if (gateway.results as boolean) {
-      yield put(setGateway(gateway.results))
+      yield put(setGateways(gateway.results))
     }
   } catch (e) {
     console.log(e)
