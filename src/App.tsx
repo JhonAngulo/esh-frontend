@@ -3,13 +3,16 @@ import { Provider } from 'react-redux'
 import store from '@store/store'
 import AppRouter from './AppRouter'
 import { BrowserRouter } from 'react-router-dom'
+import ThemeProvider from './theme'
 
 const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <CssBaseline />
-        <AppRouter />
+        <ThemeProvider>
+          <CssBaseline />
+          <AppRouter />
+        </ThemeProvider>
       </Provider>
     </BrowserRouter>
   )

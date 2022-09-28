@@ -1,13 +1,13 @@
 import Breadcrumbs from '@components/Breadcrumbs'
 import PageUnderConstruction from '@components/PageUnderConstruction'
 
-const Home = (): JSX.Element => {
+const About = (): JSX.Element => {
   return (
     <>
-      <Breadcrumbs route="Hogar" />
+      <Breadcrumbs route="Acerca" />
       <PageUnderConstruction />
     </>
   )
 }
 
-export default Home
+export default About

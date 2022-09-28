@@ -1,1 +1,1 @@
-export { default } from './Motion_SensorDevice'
+export { default } from './MotionSensorDevice'

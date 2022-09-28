@@ -5,6 +5,9 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { tokenLogin } from '@store/actions/auth'
+import Home from '@pages/Home'
+import About from '@pages/About'
+import Settings from '@pages/Settings'
 
 const AppRouter = (): JSX.Element => {
   const user = useSelector((state: any) => state.user)
@@ -49,9 +52,9 @@ const AppRouter = (): JSX.Element => {
       <Routes>
         <Route path="/login" element={<LoginLayout />} />
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<>Home</>} />
-          <Route path="/acerca" element={<>acerca</>} />
-          <Route path="/configuraciones" element={<>configuraciones</>} />
+          <Route index element={<Home />} />
+          <Route path="/acerca" element={<About />} />
+          <Route path="/configuraciones" element={<Settings />} />
           <Route path="/dispositivos" element={<Devices />} />
         </Route>
       </Routes>

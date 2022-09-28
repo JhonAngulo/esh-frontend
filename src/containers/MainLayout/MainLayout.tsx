@@ -32,7 +32,7 @@ const MainLayout = ({ window }: any): JSX.Element => {
     <div>
       <Toolbar>
         <img
-          width={220}
+          width={210}
           src={logo}
           alt="Logo Easy Smart Home"
           style={{ padding: '5px' }}

@@ -21,10 +21,7 @@ import DevicesContainer from '@containers/DevicesContainer'
 const Devices = (): JSX.Element => {
   const gateways = useSelector((state: any) => state.gateways)
   const dispatch = useDispatch()
-  const [gatewaySelected, setgatewaySelected] = useState(() => {
-    const sel = localStorage.getItem('gatewaySelected')
-    return sel === null ? '' : sel
-  })
+  const [gatewaySelected, setgatewaySelected] = useState('')
   const [msg, setMsg] = useState('{"none": "null"}')
   const mount = useRef(false)
 
@@ -45,6 +42,16 @@ const Devices = (): JSX.Element => {
   useEffect(() => {
     if (gateways.status === 'idle') {
       dispatch(getGateways())
+    }
+
+    if (gateways.status === 'succeeded') {
+      const sel = localStorage.getItem('gatewaySelected')
+      if (
+        sel !== null &&
+        Boolean(gateways.data.some((item: any) => item.serial === sel))
+      ) {
+        setgatewaySelected(sel)
+      }
     }
   }, [gateways])
 

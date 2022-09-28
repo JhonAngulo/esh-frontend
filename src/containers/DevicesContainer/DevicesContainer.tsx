@@ -2,7 +2,7 @@
 import { Grid } from '@mui/material'
 import SwitchDevice from '@components/DevicesComponents/SwitchDevice'
 import DoorSensorDevice from '@components/DevicesComponents/DoorSensorDevice'
-// import Motion_SensorDevice from '../../components/Devices/Motion_SensorDevice'
+import MotionSensorDevice from '@components/DevicesComponents/MotionSensorDevice'
 import TemperatureSensorDevice from '@components/DevicesComponents/TemperatureSensorDevice'
 import GenericDevice from '@components/DevicesComponents/GenericDevice'
 
@@ -34,16 +34,16 @@ const DevicesContainer = ({ devices, items, sendEvent }: any): JSX.Element => {
         )
 
       case 'security_sensor':
-        // if (device.subcategory === 'motion') {
-        //   return (
-        //     <Motion_SensorDevice
-        //       key={device.id}
-        //       device={device}
-        //       variables={variables}
-        //       sendEvent={sendEvent}
-        //     />
-        //   )
-        // }
+        if (device.subcategory === 'motion') {
+          return (
+            <MotionSensorDevice
+              key={device.id}
+              device={device}
+              variables={variables}
+              sendEvent={sendEvent}
+            />
+          )
+        }
         if (device.subcategory === 'door') {
           return (
             <DoorSensorDevice
