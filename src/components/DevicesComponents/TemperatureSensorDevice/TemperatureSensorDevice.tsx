@@ -84,12 +84,6 @@ const DoorSensorDevice = ({
             pr: 2
           }}
         >
-          {/* <IconButton aria-label="icon_device">
-            <MeetingRoomIcon
-              sx={{ height: 48, width: 48, opacity: 0.6 }}
-              htmlColor={`${tripped ? 'red' : '#000'}`}
-            />
-          </IconButton> */}
           <IconButton aria-label="icon_device">{handleTempIcon()}</IconButton>
           <Typography variant="subtitle2" color="inherit" component="div">
             {temp.value}° {temp.scale}
