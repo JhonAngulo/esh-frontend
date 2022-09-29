@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react'
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import { Grid, IconButton, Paper } from '@mui/material'
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  IconButton,
+  Paper,
+  Theme,
+  Typography,
+  useTheme
+} from '@mui/material'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices'
+
+import { useEffect, useState } from 'react'
+import CustomizedSwitch from '@components/CustomizedSwitch'
 
 const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
   const [state, setState] = useState(
@@ -28,69 +34,115 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
     })
   }
 
+  const theme: Theme = useTheme()
   return (
     <Grid item>
-      <Paper elevation={8} sx={{ borderRadius: 8 }}>
-        <Card sx={{ display: 'flex', width: 320, height: 114 }}>
+      <Paper
+        elevation={8}
+        sx={{
+          borderRadius: '24px 48px 24px 48px',
+          width: '180px',
+          height: '200px',
+          // backgroundColor: '#00C2A8, #3a3a39',  menu #34383c
+          backgroundColor: '#009EFA',
+          display: 'grid',
+          gridTemplate: '1fr 1fr / 1fr',
+          gap: 0
+        }}
+      >
+        <Box
+          sx={{
+            boxSizing: 'border-box',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            alignItems: 'center',
+            pr: 2
+          }}
+        >
+          <IconButton aria-label="icon_device">
+            <LightbulbIcon
+              sx={{ height: 48, width: 48, opacity: 0.6 }}
+              htmlColor={`${state === true ? 'white' : '#000'}`}
+            />
+          </IconButton>
+          <ElectricalServicesIcon
+            sx={{ height: 24, width: 24 }}
+            color="inherit"
+          />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-end'
+          }}
+        >
           <Box
             sx={{
-              height: 'auto',
-              width: 100,
-              backgroundColor: '#5b7ff74d',
+              backgroundColor: '#00000042',
+              width: '100%',
               textAlign: 'center',
-              display: 'grid',
-              alignContent: 'center',
-              justifyContent: 'center'
+              letterSpacing: 0.6
             }}
           >
-            <IconButton aria-label="icon_device">
-              <LightbulbIcon
-                sx={{ height: 38, width: 38 }}
-                htmlColor={'#3a3a39'}
-                color={`${(state as boolean) ? 'primary' : 'inherit'}`}
-              />
-            </IconButton>
-          </Box>
-          <Box sx={{ width: 220, display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto', padding: '10px', pb: 0 }}>
-              <Typography component="div" variant="h5" noWrap>
-                {device.name}
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                component="div"
-              >
-                <ElectricalServicesIcon
-                  sx={{ height: 24, width: 24 }}
-                  color="inherit"
-                />
-              </Typography>
-            </CardContent>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'right',
-                alignItems: 'center',
-                pr: '10px',
-                pb: '4px'
-              }}
+            <Typography
+              component="h6"
+              variant="h6"
+              noWrap
+              color={theme.palette.common.white}
             >
-              <FormGroup>
+              {device.name}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              pb: 2
+            }}
+          >
+            <FormControl component="fieldset">
+              <FormGroup aria-label="position" row>
                 <FormControlLabel
+                  value="start"
                   control={
-                    <Switch
+                    <CustomizedSwitch
                       checked={state}
                       onChange={handleChangeState}
                       inputProps={{ 'aria-label': 'controlled' }}
                     />
                   }
-                  label={(state as boolean) ? 'Encendido' : 'Apagado'}
+                  label={
+                    state === true ? (
+                      <Typography
+                        sx={{
+                          fontWeight: 600,
+                          color: '#000',
+                          letterSpacing: 0.6,
+                          opacity: 0.8
+                        }}
+                      >
+                        Encendido
+                      </Typography>
+                    ) : (
+                      <Typography
+                        sx={{
+                          fontWeight: 600,
+                          color: '#000',
+                          letterSpacing: 0.6,
+                          opacity: 0.8
+                        }}
+                      >
+                        Apagado
+                      </Typography>
+                    )
+                  }
+                  labelPlacement="start"
                 />
               </FormGroup>
-            </Box>
+            </FormControl>
           </Box>
-        </Card>
+        </Box>
       </Paper>
     </Grid>
   )

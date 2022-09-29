@@ -7,7 +7,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import { Grid, IconButton, Paper } from '@mui/material'
-import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk'
+import { DirectionsWalk } from '@mui/icons-material'
 
 const MotionSensorDevice = ({
   device,
@@ -57,7 +57,7 @@ const MotionSensorDevice = ({
             }}
           >
             <IconButton aria-label="icon_device">
-              <DirectionsWalkIcon
+              <DirectionsWalk
                 sx={{ height: 38, width: 38 }}
                 htmlColor={`${tripped === true ? '#d12020' : '#3a3a39'}`}
               />

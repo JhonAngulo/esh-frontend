@@ -4,9 +4,8 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { Grid, IconButton, Paper } from '@mui/material'
-import AcUnitIcon from '@mui/icons-material/AcUnit'
 import WbSunnyIcon from '@mui/icons-material/WbSunny'
-import AirIcon from '@mui/icons-material/Air'
+import { Air, AcUnit } from '@mui/icons-material'
 
 const TemperatureSensorDevice = ({
   device,
@@ -36,9 +35,9 @@ const TemperatureSensorDevice = ({
     if (temp.value >= 28) {
       return <WbSunnyIcon sx={{ height: 38, width: 38 }} color="warning" />
     } else if (temp.value >= 25) {
-      return <AirIcon sx={{ height: 38, width: 38 }} htmlColor="#1a740a" />
+      return <Air sx={{ height: 38, width: 38 }} htmlColor="#1a740a" />
     } else {
-      return <AcUnitIcon sx={{ height: 38, width: 38 }} color="primary" />
+      return <AcUnit sx={{ height: 38, width: 38 }} color="primary" />
     }
   }
 

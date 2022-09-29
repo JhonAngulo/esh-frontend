@@ -59,6 +59,8 @@ const DevicesContainer = ({ devices, items, sendEvent }: any): JSX.Element => {
 
   return (
     <Grid container spacing={4}>
+      {/* <NewDevice /> */}
+
       {devices.map((device: any) => {
         if (validCategories.includes(device.category)) {
           return handleRenderDevice(device)
