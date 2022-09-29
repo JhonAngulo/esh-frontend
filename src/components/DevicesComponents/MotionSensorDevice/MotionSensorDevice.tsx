@@ -1,13 +1,18 @@
-import { useEffect, useState } from 'react'
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import { Grid, IconButton, Paper } from '@mui/material'
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  IconButton,
+  Paper,
+  Theme,
+  Typography,
+  useTheme
+} from '@mui/material'
 import { DirectionsWalk } from '@mui/icons-material'
+import { useEffect, useState } from 'react'
+import CustomizedSwitch from '@components/CustomizedSwitch'
 
 const MotionSensorDevice = ({
   device,
@@ -15,7 +20,7 @@ const MotionSensorDevice = ({
   sendEvent
 }: any): JSX.Element => {
   const [tripped, setTripped] = useState(
-    variables.filter((item: any) => item.name === 'motion')[0].value
+    variables.filter((item: any) => item.name === 'motion')[0].value === true
   )
   const [battery, setBattery] = useState(
     variables.filter((item: any) => item.name === 'battery')[0].value
@@ -24,7 +29,9 @@ const MotionSensorDevice = ({
 
   useEffect(() => {
     setArmed(device.armed)
-    setTripped(variables.filter((item: any) => item.name === 'motion')[0].value)
+    setTripped(
+      variables.filter((item: any) => item.name === 'motion')[0].value === true
+    )
     setBattery(
       variables.filter((item: any) => item.name === 'battery')[0].value
     )
@@ -41,67 +48,118 @@ const MotionSensorDevice = ({
     // })
   }
 
+  const theme: Theme = useTheme()
   return (
     <Grid item>
-      <Paper elevation={8} sx={{ borderRadius: 8 }}>
-        <Card sx={{ display: 'flex', width: 320, height: 114 }}>
+      <Paper
+        elevation={8}
+        sx={{
+          borderRadius: '24px 48px 24px 48px',
+          width: '180px',
+          height: '200px',
+          backgroundColor: '#009EFA',
+          display: 'grid',
+          gridTemplate: '1fr 1fr / 1fr',
+          gap: 0,
+          overflow: 'hidden'
+        }}
+      >
+        <Box
+          sx={{
+            boxSizing: 'border-box',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            alignItems: 'center',
+            pr: 2
+          }}
+        >
+          <IconButton aria-label="icon_device">
+            <DirectionsWalk
+              sx={{ height: 48, width: 48, opacity: 0.6 }}
+              htmlColor={`${tripped ? 'red' : '#000'}`}
+            />
+          </IconButton>
+          <Typography variant="subtitle2" color="inherit" component="div">
+            {battery}%
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-end'
+          }}
+        >
           <Box
             sx={{
-              height: 'auto',
-              width: 100,
-              backgroundColor: `${tripped === true ? '#d77b7b' : '#5b7ff74d'}`,
+              backgroundColor: '#00000042',
+              width: '100%',
               textAlign: 'center',
-              display: 'grid',
-              alignContent: 'center',
-              justifyContent: 'center'
+              letterSpacing: 0.6
             }}
           >
-            <IconButton aria-label="icon_device">
-              <DirectionsWalk
-                sx={{ height: 38, width: 38 }}
-                htmlColor={`${tripped === true ? '#d12020' : '#3a3a39'}`}
-              />
-            </IconButton>
+            <Typography
+              component="h6"
+              variant="subtitle1"
+              noWrap
+              color={theme.palette.common.white}
+            >
+              {device.name}
+            </Typography>
           </Box>
-          <Box sx={{ width: 220, display: 'flex', flexDirection: 'column' }}>
-            <CardContent
-              sx={{ width: '220px', flex: '1 0 auto', padding: '10px' }}
-            >
-              <Typography component="div" variant="h5" noWrap>
-                {device.name}
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                component="div"
-              >
-                {battery}%
-              </Typography>
-            </CardContent>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'right',
-                alignItems: 'center',
-                pr: '10px',
-                pb: '4px'
-              }}
-            >
-              <FormGroup>
+          <Box
+            sx={{
+              pb: 2
+            }}
+          >
+            <FormControl component="fieldset">
+              <FormGroup aria-label="position" row>
                 <FormControlLabel
+                  value="start"
                   control={
-                    <Switch
+                    <CustomizedSwitch
                       checked={armed}
                       onChange={handleChangeState}
                       inputProps={{ 'aria-label': 'controlled' }}
                     />
                   }
-                  label={armed === true ? 'Armado' : 'Desarmado'}
+                  label={
+                    armed === true ? (
+                      <Typography
+                        variant="subtitle2"
+                        component="p"
+                        sx={{
+                          fontWeight: 600,
+                          color: '#000',
+                          letterSpacing: 0.6,
+                          opacity: 0.8
+                        }}
+                      >
+                        Armado
+                      </Typography>
+                    ) : (
+                      <Typography
+                        variant="subtitle2"
+                        component="p"
+                        sx={{
+                          fontWeight: 600,
+                          color: '#000',
+                          letterSpacing: 0.6,
+                          opacity: 0.8
+                        }}
+                      >
+                        Desarmado
+                      </Typography>
+                    )
+                  }
+                  labelPlacement="start"
                 />
               </FormGroup>
-            </Box>
+            </FormControl>
           </Box>
-        </Card>
+        </Box>
       </Paper>
     </Grid>
   )

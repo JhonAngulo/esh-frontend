@@ -18,11 +18,13 @@ import CustomizedSwitch from '@components/CustomizedSwitch'
 
 const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
   const [state, setState] = useState(
-    variables.filter((item: any) => item.name === 'switch')[0].value
+    variables.filter((item: any) => item.name === 'switch')[0].value === true
   )
 
   useEffect(() => {
-    setState(variables.filter((item: any) => item.name === 'switch')[0].value)
+    setState(
+      variables.filter((item: any) => item.name === 'switch')[0].value === true
+    )
   }, [variables])
 
   const handleChangeState: () => void = () => {
@@ -30,7 +32,7 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
     sendEvent({
       id: variables.filter((item: any) => item.name === 'switch')[0].id,
       eventType: 'item_updated',
-      value: !(state as boolean)
+      value: !state
     })
   }
 
@@ -47,7 +49,8 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
           backgroundColor: '#009EFA',
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr',
-          gap: 0
+          gap: 0,
+          overflow: 'hidden'
         }}
       >
         <Box
@@ -63,7 +66,7 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
           <IconButton aria-label="icon_device">
             <LightbulbIcon
               sx={{ height: 48, width: 48, opacity: 0.6 }}
-              htmlColor={`${state === true ? 'white' : '#000'}`}
+              htmlColor={`${state ? 'white' : '#000'}`}
             />
           </IconButton>
           <ElectricalServicesIcon
@@ -84,12 +87,13 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
               backgroundColor: '#00000042',
               width: '100%',
               textAlign: 'center',
+              fontSize: '0.05rem',
               letterSpacing: 0.6
             }}
           >
             <Typography
               component="h6"
-              variant="h6"
+              variant="subtitle1"
               noWrap
               color={theme.palette.common.white}
             >
@@ -113,8 +117,10 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
                     />
                   }
                   label={
-                    state === true ? (
+                    state ? (
                       <Typography
+                        variant="subtitle2"
+                        component="p"
                         sx={{
                           fontWeight: 600,
                           color: '#000',
@@ -126,6 +132,8 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
                       </Typography>
                     ) : (
                       <Typography
+                        variant="subtitle2"
+                        component="p"
                         sx={{
                           fontWeight: 600,
                           color: '#000',
