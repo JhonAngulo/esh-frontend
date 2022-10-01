@@ -1,12 +1,4 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  Paper,
-  Theme,
-  Typography,
-  useTheme
-} from '@mui/material'
+import { Box, Grid, IconButton, Paper, Typography } from '@mui/material'
 import WbSunnyIcon from '@mui/icons-material/WbSunny'
 import { Air, AcUnit } from '@mui/icons-material'
 
@@ -24,6 +16,7 @@ const DoorSensorDevice = ({
   useEffect(() => {
     // setArmed(device.armed)
     setTemp(variables.filter((item: any) => item.name === 'temp')[0].value)
+
     // setBattery(variables.filter((item) => item.name === 'battery')[0].value)
   }, [variables])
 
@@ -38,27 +31,14 @@ const DoorSensorDevice = ({
 
   const handleTempIcon: () => JSX.Element = () => {
     if (temp.value >= 28) {
-      return (
-        <WbSunnyIcon
-          sx={{ height: 48, width: 48, opacity: 0.6 }}
-          htmlColor="white"
-        />
-      )
+      return <WbSunnyIcon sx={{ height: 48, width: 48 }} color="warning" />
     } else if (temp.value >= 25) {
-      return (
-        <Air sx={{ height: 48, width: 48, opacity: 0.6 }} htmlColor="#90fb7d" />
-      )
+      return <Air sx={{ height: 48, width: 48 }} color="success" />
     } else {
-      return (
-        <AcUnit
-          sx={{ height: 48, width: 48, opacity: 0.6 }}
-          htmlColor="black"
-        />
-      )
+      return <AcUnit sx={{ height: 48, width: 48 }} color="primary" />
     }
   }
 
-  const theme: Theme = useTheme()
   return (
     <Grid item>
       <Paper
@@ -67,7 +47,6 @@ const DoorSensorDevice = ({
           borderRadius: '24px 48px 24px 48px',
           width: '180px',
           height: '200px',
-          backgroundColor: '#009EFA',
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr',
           gap: 0,
@@ -86,7 +65,7 @@ const DoorSensorDevice = ({
         >
           <IconButton aria-label="icon_device">{handleTempIcon()}</IconButton>
           <Typography variant="subtitle2" color="inherit" component="div">
-            {temp.value}° {temp.scale}
+            {temp.value}° {(temp.scale as string).charAt(0).toUpperCase()}
           </Typography>
         </Box>
         <Box
@@ -99,7 +78,6 @@ const DoorSensorDevice = ({
         >
           <Box
             sx={{
-              backgroundColor: '#00000042',
               width: '100%',
               textAlign: 'center',
               letterSpacing: 0.6
@@ -109,7 +87,7 @@ const DoorSensorDevice = ({
               component="h6"
               variant="subtitle1"
               noWrap
-              color={theme.palette.common.white}
+              color="text.primary"
             >
               {device.name}
             </Typography>

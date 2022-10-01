@@ -7,17 +7,17 @@ const MaterialUISwitch: FunctionComponent<ButtonProps> = styled(
   ({ ...props }) => <Switch {...props} />
 )(({ theme }) => ({
   '& .MuiSwitch-switchBase': {
-    color: 'inherit',
+    color: '#637381',
 
     '&.Mui-checked': {
-      color: theme.palette.common.white,
+      color: theme.palette.primary,
       '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.common.black
+        // backgroundColor: theme.palette.common.black
       }
     }
   },
   '& .MuiSwitch-track': {
-    backgroundColor: theme.palette.common.black
+    // backgroundColor: theme.palette.common.black
   }
 }))
 

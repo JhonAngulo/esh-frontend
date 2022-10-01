@@ -6,9 +6,7 @@ import {
   Grid,
   IconButton,
   Paper,
-  Theme,
-  Typography,
-  useTheme
+  Typography
 } from '@mui/material'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices'
@@ -36,7 +34,6 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
     })
   }
 
-  const theme: Theme = useTheme()
   return (
     <Grid item>
       <Paper
@@ -46,7 +43,7 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
           width: '180px',
           height: '200px',
           // backgroundColor: '#00C2A8, #3a3a39',  menu #34383c
-          backgroundColor: '#009EFA',
+          // backgroundColor: '#009EFA',
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr',
           gap: 0,
@@ -65,8 +62,9 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
         >
           <IconButton aria-label="icon_device">
             <LightbulbIcon
-              sx={{ height: 48, width: 48, opacity: 0.6 }}
-              htmlColor={`${state ? 'white' : '#000'}`}
+              sx={{ height: 48, width: 48 }}
+              // htmlColor="#a1abb3"
+              color={`${state ? 'primary' : 'action'}`}
             />
           </IconButton>
           <ElectricalServicesIcon
@@ -84,7 +82,6 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
         >
           <Box
             sx={{
-              backgroundColor: '#00000042',
               width: '100%',
               textAlign: 'center',
               fontSize: '0.05rem',
@@ -95,7 +92,7 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
               component="h6"
               variant="subtitle1"
               noWrap
-              color={theme.palette.common.white}
+              color="text.primary"
             >
               {device.name}
             </Typography>
@@ -121,9 +118,9 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}
@@ -134,9 +131,9 @@ const SwitchDevice = ({ device, variables, sendEvent }: any): JSX.Element => {
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}

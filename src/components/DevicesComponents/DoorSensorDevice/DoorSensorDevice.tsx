@@ -6,9 +6,7 @@ import {
   Grid,
   IconButton,
   Paper,
-  Theme,
-  Typography,
-  useTheme
+  Typography
 } from '@mui/material'
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
 
@@ -49,7 +47,6 @@ const DoorSensorDevice = ({
     // })
   }
 
-  const theme: Theme = useTheme()
   return (
     <Grid item>
       <Paper
@@ -58,7 +55,6 @@ const DoorSensorDevice = ({
           borderRadius: '24px 48px 24px 48px',
           width: '180px',
           height: '200px',
-          backgroundColor: '#009EFA',
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr',
           gap: 0,
@@ -77,8 +73,8 @@ const DoorSensorDevice = ({
         >
           <IconButton aria-label="icon_device">
             <MeetingRoomIcon
-              sx={{ height: 48, width: 48, opacity: 0.6 }}
-              htmlColor={`${tripped ? 'red' : '#000'}`}
+              sx={{ height: 48, width: 48 }}
+              color={`${tripped ? 'error' : 'action'}`}
             />
           </IconButton>
           <Typography variant="subtitle2" color="inherit" component="div">
@@ -95,7 +91,6 @@ const DoorSensorDevice = ({
         >
           <Box
             sx={{
-              backgroundColor: '#00000042',
               width: '100%',
               textAlign: 'center',
               letterSpacing: 0.6
@@ -105,7 +100,7 @@ const DoorSensorDevice = ({
               component="h6"
               variant="subtitle1"
               noWrap
-              color={theme.palette.common.white}
+              color="text.primary"
             >
               {device.name}
             </Typography>
@@ -131,9 +126,9 @@ const DoorSensorDevice = ({
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}
@@ -144,9 +139,9 @@ const DoorSensorDevice = ({
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}

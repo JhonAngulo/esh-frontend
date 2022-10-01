@@ -6,9 +6,7 @@ import {
   Grid,
   IconButton,
   Paper,
-  Theme,
-  Typography,
-  useTheme
+  Typography
 } from '@mui/material'
 import { DirectionsWalk } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
@@ -48,7 +46,6 @@ const MotionSensorDevice = ({
     // })
   }
 
-  const theme: Theme = useTheme()
   return (
     <Grid item>
       <Paper
@@ -57,7 +54,6 @@ const MotionSensorDevice = ({
           borderRadius: '24px 48px 24px 48px',
           width: '180px',
           height: '200px',
-          backgroundColor: '#009EFA',
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr',
           gap: 0,
@@ -76,8 +72,8 @@ const MotionSensorDevice = ({
         >
           <IconButton aria-label="icon_device">
             <DirectionsWalk
-              sx={{ height: 48, width: 48, opacity: 0.6 }}
-              htmlColor={`${tripped ? 'red' : '#000'}`}
+              sx={{ height: 48, width: 48 }}
+              color={`${tripped ? 'error' : 'action'}`}
             />
           </IconButton>
           <Typography variant="subtitle2" color="inherit" component="div">
@@ -94,7 +90,6 @@ const MotionSensorDevice = ({
         >
           <Box
             sx={{
-              backgroundColor: '#00000042',
               width: '100%',
               textAlign: 'center',
               letterSpacing: 0.6
@@ -104,7 +99,7 @@ const MotionSensorDevice = ({
               component="h6"
               variant="subtitle1"
               noWrap
-              color={theme.palette.common.white}
+              color="text.primary"
             >
               {device.name}
             </Typography>
@@ -130,9 +125,9 @@ const MotionSensorDevice = ({
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}
@@ -143,9 +138,9 @@ const MotionSensorDevice = ({
                       <Typography
                         variant="subtitle2"
                         component="p"
+                        color="text.secondary"
                         sx={{
                           fontWeight: 600,
-                          color: '#000',
                           letterSpacing: 0.6,
                           opacity: 0.8
                         }}

@@ -141,7 +141,6 @@ const MainLayout = ({ window }: any): JSX.Element => {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: '#f3f6f9',
           height: '100vh'
         }}
       >

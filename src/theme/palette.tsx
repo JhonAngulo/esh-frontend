@@ -30,9 +30,9 @@ const GREY = {
 
 const PRIMARY = {
   lighter: '#D1E9FC',
-  light: '#76B0F1',
-  main: '#009EFA',
-  dark: '#103996',
+  light: '#33a7ee',
+  main: '#0091ea',
+  dark: '#0065a3',
   darker: '#061B64',
   contrastText: '#fff'
 }
@@ -110,8 +110,8 @@ const palette = {
   gradients: GRADIENTS,
   chart: CHART_COLORS,
   divider: GREY[500_24],
-  text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-  background: { paper: '#fff', default: GREY[100], neutral: GREY[200] },
+  text: { primary: GREY[700], secondary: GREY[600], disabled: GREY[500] },
+  background: { paper: '#fff', default: GREY[300], neutral: GREY[200] },
   action: {
     active: GREY[600],
     hover: GREY[500_8],
