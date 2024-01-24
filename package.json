@@ -22,7 +22,7 @@
     "@mui/material": "^5.10.2",
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.8.5",
-    "axios": "^0.27.2",
+    "axios": "^1.6.5",
     "mqtt": "^4.3.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
